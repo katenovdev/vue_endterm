@@ -8,24 +8,24 @@ onBeforeMount(() => {
 });
 
 definePageMeta({
-  middleware: 'auth',
+  middleware: "auth",
 });
-const results = ref(store?.vacancies);
+const results = computed(() => store.$state.myVacancies);
 import SearchResults from "~/components/SearchResults.vue";
 const handleSearch = () => {
   return [];
-}
+};
 </script>
 
 <template>
   <div class="main">
-  <SearchForm @search="handleSearch" />
-  <SearchResults :results="results" />
+    <SearchForm @search="handleSearch" />
+    <SearchResults :results="results" />
   </div>
 </template>
 
 <style scoped>
-.main{
+.main {
   width: 80%;
   display: flex;
   flex-direction: column;

@@ -12,11 +12,6 @@ const store = useStore();
 onBeforeMount(() => {
   store.init();
 });
-// const error = computed(() => store.state.auth.error);
-
-// onUnmounted(() => {
-//   store.dispatch("auth/setError", null);
-// });
 
 const handleSignin = () => {
   store.login(email.value, password.value);
