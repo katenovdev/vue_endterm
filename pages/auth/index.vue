@@ -2,25 +2,26 @@
 import { ref, onUnmounted } from "vue";
 import { useRouter } from "vue-router";
 import Logo from "@/assets/logo.svg";
-// import { useStore } from "vuex";
+import { useStore } from "~/store";
 
 const email = ref("");
 const password = ref("");
 const router = useRouter();
-// const store = useStore();
+const store = useStore();
+
+onBeforeMount(() => {
+  store.init();
+});
 // const error = computed(() => store.state.auth.error);
 
 // onUnmounted(() => {
 //   store.dispatch("auth/setError", null);
 // });
 
-// const handleSignin = () => {
-//   store.dispatch("auth/signIn", {
-//     email: email.value,
-//     password: password.value,
-//     router,
-//   });
-// };
+const handleSignin = () => {
+  store.login(email.value, password.value);
+  router.push("/main");
+};
 </script>
 
 <template>

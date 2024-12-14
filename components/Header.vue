@@ -1,36 +1,33 @@
 <template>
   <header class="header">
+    <!-- Логотип -->
     <div class="logo">
       <span class="hh-logo">hh</span>
     </div>
 
-    <!-- Authenticated Header -->
-    <div v-if="store.isAuth" class="auth-section">
+    <!-- Блок для авторизованного пользователя -->
+    <div v-if="isAuth" class="auth-section">
       <button class="resume-button">
         Мои резюме <span class="badge">38</span>
       </button>
-      <button>Отклики</button>
-      <button>Помощь</button>
+      <button class="icon-button">Отклики</button>
+      <button class="icon-button">Помощь</button>
       <button class="create-resume">Создать резюме</button>
     </div>
 
-    <!-- Non-Authenticated Header -->
+    <!-- Блок для неавторизованного пользователя -->
     <div v-else class="guest-section">
-      <button>Помощь</button>
+      <button class="icon-button">Поиск</button>
       <button class="create-resume">Создать резюме</button>
-      <button>Войти</button>
-    </div>
-
-    <div class="search">
-      <input placeholder="Поиск" />
-      <span>Алматы</span>
+      <button class="login-button">Войти</button>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { useStore } from "@/store"; // Import your Pinia store
+import { useStore } from "@/store"; // Подключение Pinia Store
 import { storeToRefs } from "pinia";
+import { onBeforeMount } from "vue";
 
 const store = useStore();
 const { isAuth } = storeToRefs(store);
@@ -38,7 +35,6 @@ const { isAuth } = storeToRefs(store);
 onBeforeMount(() => {
   store.init();
 });
-
 </script>
 
 <style scoped>
@@ -46,17 +42,25 @@ onBeforeMount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: black;
   color: white;
+  font-family: Arial, sans-serif;
+  height: 50px;
 }
 
 .logo .hh-logo {
   background-color: red;
   border-radius: 50%;
-  padding: 8px;
+  padding: 8px 12px;
+  font-size: 18px;
   font-weight: bold;
-  color: white;
+}
+
+.auth-section,
+.guest-section {
+  display: flex;
+  align-items: center;
 }
 
 .auth-section button,
@@ -65,7 +69,7 @@ onBeforeMount(() => {
   border: none;
   color: white;
   cursor: pointer;
-  margin: 0 5px;
+  margin: 0 10px;
   font-size: 14px;
 }
 
@@ -76,24 +80,38 @@ onBeforeMount(() => {
   padding: 2px 6px;
   font-size: 12px;
   margin-left: 5px;
+  font-weight: bold;
 }
 
 .create-resume {
   background-color: #2ecc71;
   color: white;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 4px;
+  font-weight: bold;
+}
+
+.icon-button,
+.login-button {
+  font-size: 14px;
+  color: white;
+}
+
+.search {
+  display: flex;
+  align-items: center;
 }
 
 .search input {
-  padding: 5px;
-  margin-right: 10px;
+  padding: 5px 10px;
   border: none;
   border-radius: 4px;
+  margin-right: 5px;
 }
 
-.search span {
+.search .location {
+  color: #ccc;
+  font-size: 14px;
   margin-left: 5px;
-  color: gray;
 }
 </style>

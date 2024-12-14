@@ -1,10 +1,13 @@
-import { useStore } from "~/stores";
+import { useStore } from "~/store";
 
 export default defineNuxtRouteMiddleware((to, from) => {
     const userStore = useStore();
-    const isAuthenticated = computed(() => userStore.user !== null);
 
-    if (!isAuthenticated.value) {
+    // Проверяем, есть ли пользователь
+    const isAuthenticated = userStore.user !== null;
+
+    // Если пользователь не авторизован, перенаправляем на страницу авторизации
+    if (!isAuthenticated) {
         return navigateTo('/auth');
     }
 });
