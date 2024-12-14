@@ -10,4 +10,11 @@
 <script setup lang="ts">
 import GetJobComponent from "~/components/landing/GetJobComponent.vue";
 import VacanciesComponent from "~/components/landing/VacanciesComponent.vue";
+import { useStore } from "~/store";
+
+const store = useStore();
+
+onBeforeMount(() => {
+  store.init();
+});
 </script>

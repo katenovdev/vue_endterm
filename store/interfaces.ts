@@ -1,7 +1,16 @@
 export interface IResume {
-  id: number;
-  title: string;
-  description: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  birthday: Date;
+  gender: string;
+  about: string;
+  citizenship: string;
+  position: string;
+  salary: number;
+  mainLanguage: string;
+  skills: number[];
+  userId: number;
 }
 
 export enum USER_ROLE {
