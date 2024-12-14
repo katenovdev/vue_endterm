@@ -77,4 +77,5 @@ export interface IStore {
   resumes: IResume[];
   myVacancies: IVacancy[];
   skills: ISkill[];
+  favourites: any;
 }

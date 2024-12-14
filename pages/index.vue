@@ -3,12 +3,13 @@
     <GetJobComponent />
     <VacanciesComponent />
     <About />
-    <Footer />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useStore } from "~/store";
+
+import About from '~/components/landing/About.vue'
 
 const store = useStore();
 const router = useRouter();

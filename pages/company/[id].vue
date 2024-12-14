@@ -1,8 +1,6 @@
 <template>
     <div class="main">
-      <div v-for="(company, index) in results" :key="index" class="result-item">
-        <CompanyCard :company="company" />
-      </div>
+      <CompanyView/>
     </div>
   </template>
   
@@ -10,6 +8,10 @@
   import { computed } from "vue";
   import { useStore } from "~/store";
   
+
+  definePageMeta({
+  middleware: "auth",
+    });
   const store = useStore();
   
   const results = computed(() => store.$state.companies || []);

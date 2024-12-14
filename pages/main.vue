@@ -37,6 +37,7 @@ const handleSearch = (query: string) => {
 
 <template>
   <div class="main">
+    <h1>Мои Резюме</h1>
     <SearchForm @search="handleSearch" />
     <SearchResults :results="results" :type="type" />
   </div>

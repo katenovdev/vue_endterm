@@ -7,7 +7,7 @@ import ResumeCard from "@/components/ResumeCard.vue"; // Импорт компо
 const store = useStore();
 
 // Вычисляемое свойство для избранных вакансий
-const favouriteVacancies = computed(() => store.getFavourites("vacancies"));
+const favouriteVacancies = computed(() => store.$state.favourites);
 </script>
 
 <template>
@@ -17,9 +17,9 @@ const favouriteVacancies = computed(() => store.getFavourites("vacancies"));
     <!-- Отображение избранных вакансий -->
     <div v-if="favouriteVacancies.length">
       <ResumeCard
-          v-for="vacancy in favouriteVacancies"
-          :key="vacancy.id"
-          :resume="vacancy"
+        v-for="vacancy in favouriteVacancies"
+        :key="vacancy.id"
+        :resume="vacancy"
       />
     </div>
     <p v-else>Нет избранных вакансий</p>

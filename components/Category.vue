@@ -1,5 +1,8 @@
 <script setup lang="ts">
-
+import { ICompany } from "~/store/interfaces";
+defineProps<{
+  company: ICompany;
+}>();
 </script>
 
 <template>

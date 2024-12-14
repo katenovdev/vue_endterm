@@ -13,6 +13,7 @@ export const useStore = defineStore("counter", {
     resumes: [],
     myVacancies: [],
     skills: [],
+    favourites: [],
   }),
 
   actions: {
@@ -20,15 +21,19 @@ export const useStore = defineStore("counter", {
       this.resumes = resumes;
     },
 
-    addToFavourites({ id, type }: { id: number; type: "resumes" | "vacancies" }) {
+    addToFavourites({
+      id,
+      type,
+    }: {
+      id: number;
+      type: "resumes" | "vacancies";
+    }) {
       if (type === "resumes") {
-        this.resumes = this.resumes.map((resume) =>
-            resume.id === id ? { ...resume, isFavourite: !resume.isFavourite } : resume
-        );
+        const res = this.resumes.filter((resume) => resume.id === id);
+        this.favourites = [...this.favourites, ...res];
       } else if (type === "vacancies") {
-        this.vacancies = this.vacancies.map((vacancy) =>
-            vacancy.id === id ? { ...vacancy, isFavourite: !vacancy.isFavourite } : vacancy
-        );
+        const res = this.vacancies.filter((vacancy) => vacancy.id === id);
+        this.favourites = [...this.favourites, ...res];
       }
     },
 

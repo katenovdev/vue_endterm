@@ -3,7 +3,7 @@
     <Category></Category>
     <h1>Поиск вакансий</h1>
     <SearchForm @search="handleSearch" />
-    <SearchResults :results="results" />
+    <SearchResults :results="results" type="vacancy" />
   </div>
 </template>
 
