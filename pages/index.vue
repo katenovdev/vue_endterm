@@ -1,6 +1,13 @@
 <template>
   <div>
-    <h1>Welcome to My Nuxt App</h1>
-    <nuxt-link to="/about">Go to About Page</nuxt-link>
+    <GetJobComponent />
+    <VacanciesComponent />
+    <About />
+    <Footer />
   </div>
 </template>
+
+<script setup lang="ts">
+import GetJobComponent from "~/components/landing/GetJobComponent.vue";
+import VacanciesComponent from "~/components/landing/VacanciesComponent.vue";
+</script>
