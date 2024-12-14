@@ -12,11 +12,27 @@ export const useStore = defineStore("counter", {
     users: [],
     resumes: [],
     myVacancies: [],
+    skills: [],
   }),
 
   actions: {
     setResumes({ resumes, name }: { resumes: IResume[]; name: string }) {
       this.resumes = resumes;
+    },
+
+    async getData(key: string, file: string) {
+      let data = localStorage.getItem(key);
+
+      if (!data) {
+        const response = await fetch(`/${file}`);
+        if (!response.ok) {
+          throw new Error(`Ошибка при загрузке файла ${file}`);
+        }
+        data = await response.json();
+        localStorage.setItem(key, JSON.stringify(data));
+      }
+
+      return JSON.parse(data);
     },
 
     async login(email: string, password: string): Promise<boolean> {
@@ -52,16 +68,24 @@ export const useStore = defineStore("counter", {
       return true;
     },
 
+    async getSkills() {
+      if (this.skills.length === 0) {
+        this.skills = await this.getData("skills", "skills.json");
+      }
+
+      return this.skills;
+    },
+
     async init() {
       const vacanciesKey = "vacancies";
       const companiesKey = "companies";
       const resumesKey = "resumes";
       const usersKey = "users";
+      const skillsKey = "skills";
 
       const getData = async (key: string, file: string) => {
         let data = localStorage.getItem(key);
 
-        // Если данных нет в localStorage, загружаем их с файла
         if (!data) {
           const response = await fetch(`/${file}`);
           if (!response.ok) {
@@ -79,6 +103,7 @@ export const useStore = defineStore("counter", {
       this.companies = await getData(companiesKey, "companies.json");
       this.resumes = await getData(resumesKey, "resumes.json");
       this.users = await getData(usersKey, "users.json");
+      this.skills = await getData(skillsKey, "skills.json");
     },
   },
 });

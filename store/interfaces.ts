@@ -76,4 +76,5 @@ export interface IStore {
   users: IUser[];
   resumes: IResume[];
   myVacancies: IVacancy[];
+  skills: ISkill[];
 }
