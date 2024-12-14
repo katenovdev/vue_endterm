@@ -1,9 +1,9 @@
 <template>
   <div class="vacany-search">
     <Category></Category>
-    <h1>Поиск вакансий</h1>
+    <h1>Поиск резюме</h1>
     <SearchForm @search="handleSearch" />
-    <SearchResults :results="results" />
+    <SearchResults :results="results" :props="'resume'"/>
   </div>
 </template>
 
@@ -16,7 +16,7 @@ onBeforeMount(() => {
 });
 import SearchForm from '@/components/SearchForm.vue';
 import SearchResults from '@/components/SearchResults.vue';
-const results = store.$state.vacancies;
+const results = store.$state.resumes;
 
 const handleSearch = () => {
   return results;

@@ -3,7 +3,8 @@
     <div v-if="results.length" class="results-list">
       <h2>Результаты:</h2>
       <div v-for="(item, index) in results" :key="index" class="result-item">
-        <SearchCard :item="item" />
+        <SearchCard v-if="props.type=='vacancy'" :item="item" />
+        <ResumeCard v-else :item="item" />
       </div>
     </div>
     <p v-else class="no-results">Нет результатов</p>
@@ -18,11 +19,13 @@ const props = defineProps({
     type: Array,
     default: () => [],
   },
+  type: {
+    type: String,
+  }
 });
 
 // Реактивная переменная для проверки наличия результатов
 const hasResults = computed(() => props.results.length > 0);
-
 </script>
 
 <style scoped>
