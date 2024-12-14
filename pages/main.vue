@@ -1,6 +1,10 @@
 <script setup lang="ts">
+import { ref, computed, onBeforeMount } from "vue";
 import SearchForm from "~/components/SearchForm.vue";
 import { useStore } from "~/store";
+import SearchResults from "~/components/SearchResults.vue";
+import { USER_ROLE } from "~/store/interfaces";
+
 const store = useStore();
 
 onBeforeMount(() => {
@@ -10,9 +14,23 @@ onBeforeMount(() => {
 definePageMeta({
   middleware: "auth",
 });
-const results = computed(() => store.$state.myVacancies);
-import SearchResults from "~/components/SearchResults.vue";
-const handleSearch = () => {
+
+// Извлекаем пользователя и его роль
+const user = computed(() => store.$state.user);
+
+// results зависит от роли пользователя
+const results = computed(() => {
+  if (user.value?.role === USER_ROLE.JOB_PROVIDER) {
+    return store.$state.myVacancies; // Вакансии для JOB_PROVIDER
+  }
+  return store.$state.myResumes; // Резюме для JOB_SEEKER
+});
+
+const type = computed(() =>
+  user.value?.role === USER_ROLE.JOB_PROVIDER ? "vacancy" : "resume"
+);
+
+const handleSearch = (query: string) => {
   return [];
 };
 </script>
@@ -20,7 +38,7 @@ const handleSearch = () => {
 <template>
   <div class="main">
     <SearchForm @search="handleSearch" />
-    <SearchResults :results="results" />
+    <SearchResults :results="results" :type="type" />
   </div>
 </template>
 
