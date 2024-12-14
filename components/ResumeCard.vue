@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { defineProps, defineEmits } from "vue";
+import { useStore } from "~/store";
+const store = useStore();
+
+onBeforeMount(() => {
+  store.init();
+});
+
 
 interface Resume {
   id: number;
@@ -36,7 +43,8 @@ const isFavorite = ref(false);
 // Метод для добавления в избранное
 const toggleFavorite = () => {
   isFavorite.value = !isFavorite.value;
-  emit("addToFavorites", { resume: props.resume, isFavorite: isFavorite.value });
+  store.addToFavourites({ id: props.resume.id, type: "resumes" });
+
 };
 </script>
 

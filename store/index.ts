@@ -20,6 +20,27 @@ export const useStore = defineStore("counter", {
       this.resumes = resumes;
     },
 
+    addToFavourites({ id, type }: { id: number; type: "resumes" | "vacancies" }) {
+      if (type === "resumes") {
+        this.resumes = this.resumes.map((resume) =>
+            resume.id === id ? { ...resume, isFavourite: !resume.isFavourite } : resume
+        );
+      } else if (type === "vacancies") {
+        this.vacancies = this.vacancies.map((vacancy) =>
+            vacancy.id === id ? { ...vacancy, isFavourite: !vacancy.isFavourite } : vacancy
+        );
+      }
+    },
+
+    // Получение избранных элементов
+    getFavourites(type: "resumes" | "vacancies") {
+      if (type === "resumes") {
+        return this.resumes.filter((resume) => resume.isFavourite);
+      } else if (type === "vacancies") {
+        return this.vacancies.filter((vacancy) => vacancy.isFavourite);
+      }
+    },
+
     async logOut() {
       this.user = null;
       this.isAuth = false;

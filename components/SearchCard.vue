@@ -19,12 +19,19 @@
     <p v-if="item.address" class="card-address">
       Адрес: {{ item.address }}
     </p>
-    <button v-if="item.link" @click="openLink" class="card-button">Подробнее</button>
+    <div class="card-actions">
+      <button v-if="item.link" @click="openLink" class="card-button">Подробнее</button>
+        <button @click="toggleFavourite" class="like-button">
+        <span v-if="isFavourite">❤️</span>
+        <span v-else>🤍</span>
+      </button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed } from "vue";
+import { useStore } from "~/store";
 
 // Пропсы
 const props = defineProps({
@@ -34,21 +41,37 @@ const props = defineProps({
   },
 });
 
+// Доступ к store
+const store = useStore();
+
+onBeforeMount(() => {
+  store.init();
+});
+
+
 // Вычисляемый опыт
 const experienceLabel = computed(() => {
   const experienceTypes = {
-    WITHOUT: 'Без опыта',
-    PARTIAL: 'Частичный опыт',
-    FULL: 'Полный опыт',
+    WITHOUT: "Без опыта",
+    PARTIAL: "Частичный опыт",
+    FULL: "Полный опыт",
   };
-  return experienceTypes[props.item.experienceType] || 'Не указано';
+  return experienceTypes[props.item.experienceType] || "Не указано";
 });
+
+// Проверка, является ли элемент избранным
+const isFavourite = computed(() => !!props.item.isFavourite);
 
 // Метод открытия ссылки
 const openLink = () => {
   if (props.item.link) {
-    window.open(props.item.link, '_blank');
+    window.open(props.item.link, "_blank");
   }
+};
+
+// Метод добавления/удаления из избранного
+const toggleFavourite = () => {
+  store.addToFavourites({ id: props.resume.id, type: "vacancies" });
 };
 </script>
 

@@ -14,7 +14,7 @@
     <div class="right-section">
       <button class="icon-button" @click="goToSearchPage">Поиск</button>
       <template v-if="isAuth">
-        <button class="icon-button" @click="goToResumePage">Избранное</button>
+        <button class="icon-button" @click="goToFavouritesPage">Избранное</button>
         <!-- User dropdown -->
         <div class="user-menu">
           <button class="icon-button" @click="toggleMenu">{{ userName }}</button>
@@ -75,6 +75,11 @@ const goToSearchPage = () => {
 const goToResumePage = () => {
   router.push("/main");
 };
+
+const goToFavouritesPage = () => {
+  router.push('/favourites'); // Navigate to the resume page
+};
+
 
 const goToAuthPage = () => {
   router.push("/auth");
