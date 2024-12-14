@@ -20,6 +20,13 @@ export const useStore = defineStore("counter", {
       this.resumes = resumes;
     },
 
+    async logOut() {
+      this.user = null;
+      this.isAuth = false;
+      this.myVacancies = [];
+      this.myResumes = [];
+    },
+
     async getData(key: string, file: string) {
       let data = localStorage.getItem(key);
 

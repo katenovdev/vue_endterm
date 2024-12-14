@@ -12,11 +12,6 @@ const store = useStore();
 onBeforeMount(() => {
   store.init();
 });
-// const error = computed(() => store.state.auth.error);
-
-// onUnmounted(() => {
-//   store.dispatch("auth/setError", null);
-// });
 
 const handleSignin = () => {
   store.login(email.value, password.value);
@@ -51,9 +46,6 @@ const handleSignin = () => {
             />
             <button class="button button-primary" type="submit">Войти</button>
           </form>
-          <p v-for="(value, key) in error" :key="key" class="error">
-            {{ value }}
-          </p>
         </div>
       </section>
     </div>
