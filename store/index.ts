@@ -60,18 +60,25 @@ export const useStore = defineStore("counter", {
 
       const getData = async (key: string, file: string) => {
         let data = localStorage.getItem(key);
+
+        // Если данных нет в localStorage, загружаем их с файла
         if (!data) {
-          const response = await fetch(file);
+          const response = await fetch(`/${file}`);
+          if (!response.ok) {
+            throw new Error(`Ошибка при загрузке файла ${file}`);
+          }
           data = await response.json();
           localStorage.setItem(key, JSON.stringify(data));
         }
+
         return JSON.parse(data);
       };
 
-      this.vacancies = await getData(vacanciesKey, "../json/vacancies.json");
-      this.companies = await getData(companiesKey, "../json/companies.json");
-      this.resumes = await getData(resumesKey, "../json/resumes.json");
-      this.users = await getData(usersKey, "../json/users.json");
+      // Загружаем данные для каждой сущности
+      this.vacancies = await getData(vacanciesKey, "vacancies.json");
+      this.companies = await getData(companiesKey, "companies.json");
+      this.resumes = await getData(resumesKey, "resumes.json");
+      this.users = await getData(usersKey, "users.json");
     },
   },
 });
