@@ -1,15 +1,20 @@
 import { defineStore } from "pinia";
+import type { IResume, IStore } from "./interfaces";
 
 export const useStore = defineStore("counter", {
-  state: () => ({
-    count: 0,
+  state: (): IStore => ({
+    isAuth: false,
+    user: null,
+    myResumes: [],
+    vacancies: [],
+    companies: [],
+    users: [],
+    resumes: [],
+    myVacancies: [],
   }),
   actions: {
-    increment() {
-      this.count++;
-    },
-    decrement() {
-      this.count--;
+    setResumes({ resumes, name }: { resumes: IResume[]; name: string }) {
+      this.resumes = resumes;
     },
   },
 });
