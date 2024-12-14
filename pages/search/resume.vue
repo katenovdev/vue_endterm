@@ -16,7 +16,7 @@ onBeforeMount(() => {
 });
 import SearchForm from '@/components/SearchForm.vue';
 import SearchResults from '@/components/SearchResults.vue';
-const results = store.$state.resumes;
+const results = computed(() => store.$state.resumes);
 
 const handleSearch = () => {
   return results;

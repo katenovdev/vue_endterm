@@ -4,7 +4,7 @@
       <h2>Результаты:</h2>
       <div v-for="(item, index) in results" :key="index" class="result-item">
         <SearchCard v-if="props.type=='vacancy'" :item="item" />
-        <ResumeCard v-else :item="item" />
+        <ResumeCard v-else :resume="item" />
       </div>
     </div>
     <p v-else class="no-results">Нет результатов</p>

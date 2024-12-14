@@ -14,17 +14,17 @@ const store = useStore();
 onBeforeMount(() => {
   store.init();
 });
-import SearchForm from '@/components/SearchForm.vue';
-import SearchResults from '@/components/SearchResults.vue';
-const results = store.$state.vacancies;
+import SearchForm from "@/components/SearchForm.vue";
+import SearchResults from "@/components/SearchResults.vue";
+const results = computed(() => store.$state.vacancies);
 
 const handleSearch = () => {
   return results;
-}
+};
 </script>
 
 <style scoped>
-.vacany-search{
+.vacany-search {
   width: 80%;
   display: flex;
   flex-direction: column;
