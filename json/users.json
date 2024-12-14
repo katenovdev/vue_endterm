@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "firstName": "Ербол",
+    "lastName": "Нуртаев",
+    "role": "JOB_SEEKER",
+    "companyId": null,
+    "phone": "+77011234567",
+    "email": "erbol.nurtaev@mail.kz"
+  },
+  {
+    "id": 2,
+    "firstName": "Асель",
+    "lastName": "Казбекова",
+    "role": "JOB_SEEKER",
+    "companyId": null,
+    "phone": "+77029876543",
+    "email": "assel.kazbekova@mail.kz"
+  },
+  {
+    "id": 3,
+    "firstName": "Алибек",
+    "lastName": "Сарсенбаев",
+    "role": "JOB_SEEKER",
+    "companyId": null,
+    "phone": "+77034567890",
+    "email": "alibek.sarsenbayev@mail.kz"
+  },
+  {
+    "id": 4,
+    "firstName": "Жанар",
+    "lastName": "Тулеубаева",
+    "role": "JOB_SEEKER",
+    "companyId": null,
+    "phone": "+77046789012",
+    "email": "zhanar.tuleubayeva@mail.kz"
+  },
+  {
+    "id": 5,
+    "firstName": "Данияр",
+    "lastName": "Ахметов",
+    "role": "JOB_SEEKER",
+    "companyId": null,
+    "phone": "+77057890123",
+    "email": "daniyar.akhmetov@mail.kz"
+  },
+  {
+    "id": 6,
+    "firstName": "Айдана",
+    "lastName": "Бекенова",
+    "role": "JOB_PROVIDER",
+    "companyId": 1,
+    "phone": "+77068901234",
+    "email": "aidana.bekenova@aitiservice.kz"
+  },
+  {
+    "id": 7,
+    "firstName": "Ерасыл",
+    "lastName": "Муратов",
+    "role": "JOB_PROVIDER",
+    "companyId": 2,
+    "phone": "+77079801234",
+    "email": "yerasyl.muratov@energoprom.kz"
+  },
+  {
+    "id": 8,
+    "firstName": "Алма",
+    "lastName": "Мухамбетова",
+    "role": "JOB_PROVIDER",
+    "companyId": 3,
+    "phone": "+77080912345",
+    "email": "alma.muhambetova@logisticpro.kz"
+  },
+  {
+    "id": 9,
+    "firstName": "Куаныш",
+    "lastName": "Омаров",
+    "role": "JOB_PROVIDER",
+    "companyId": 4,
+    "phone": "+77091234567",
+    "email": "kuanysh.omarov@transline.kz"
+  },
+  {
+    "id": 10,
+    "firstName": "Мадина",
+    "lastName": "Садыкова",
+    "role": "JOB_PROVIDER",
+    "companyId": 5,
+    "phone": "+77012345678",
+    "email": "madina.sadykova@kazbiznes.kz"
+  }
+]
