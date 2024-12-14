@@ -1,41 +1,60 @@
 <template>
   <header class="header">
-    <!-- Логотип -->
-    <div class="logo">
-      <span class="hh-logo">hh</span>
-    </div>
-
-    <!-- Блок для авторизованного пользователя -->
-    <div v-if="isAuth" class="auth-section">
-      <button class="resume-button">
-        Мои резюме <span class="badge">38</span>
+    <!-- Левый блок -->
+    <div class="left-section">
+      <div class="logo">
+        <span class="hh-logo">hh</span>
+      </div>
+      <button v-if="isAuth" class="resume-button" @click="goToResumePage">
+        Мои резюме
       </button>
-      <button class="icon-button">Отклики</button>
-      <button class="icon-button">Помощь</button>
-      <button class="create-resume">Создать резюме</button>
     </div>
 
-    <!-- Блок для неавторизованного пользователя -->
-    <div v-else class="guest-section">
-      <button class="icon-button">Поиск</button>
-      <button class="create-resume">Создать резюме</button>
-      <button class="login-button">Войти</button>
+    <!-- Правый блок -->
+    <div class="right-section">
+      <button class="icon-button" @click="goToSearchPage">Поиск</button>
+      <template v-if="isAuth">
+        <button class="icon-button" @click="goToResumePage">Избранное</button>
+        <button class="icon-button">{{ userName }}</button>
+      </template>
+      <template v-else>
+        <button class="login-button" @click="goToAuthPage">Войти</button>
+      </template>
     </div>
   </header>
 </template>
 
+
 <script setup lang="ts">
-import { useStore } from "@/store"; // Подключение Pinia Store
+import { useStore } from "@/store"; // Pinia Store
 import { storeToRefs } from "pinia";
-import { onBeforeMount } from "vue";
+import { computed, onBeforeMount } from "vue";
+import { useRouter } from 'vue-router';
 
 const store = useStore();
-const { isAuth } = storeToRefs(store);
+const { isAuth, user } = storeToRefs(store); // Access the user object
+const router = useRouter();
 
 onBeforeMount(() => {
   store.init();
 });
+
+// Computed property to display the user's name or a fallback
+const userName = computed(() => (user.value?.firstName || "Пользователь"));
+
+const goToSearchPage = () => {
+  router.push('/search'); // Navigate to the search page
+};
+
+const goToResumePage = () => {
+  router.push('/main'); // Navigate to the resume page
+};
+
+const goToAuthPage = () => {
+  router.push('/auth'); // Navigate to the auth page
+};
 </script>
+
 
 <style scoped>
 .header {
@@ -47,6 +66,17 @@ onBeforeMount(() => {
   color: white;
   font-family: Arial, sans-serif;
   height: 50px;
+
+  /* Sticky positioning */
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top of other elements */
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
 }
 
 .logo .hh-logo {
@@ -55,63 +85,24 @@ onBeforeMount(() => {
   padding: 8px 12px;
   font-size: 18px;
   font-weight: bold;
+  margin-right: 10px;
 }
 
-.auth-section,
-.guest-section {
-  display: flex;
-  align-items: center;
-}
-
-.auth-section button,
-.guest-section button {
+.resume-button,
+.icon-button,
+.login-button {
   background: none;
   border: none;
   color: white;
   cursor: pointer;
-  margin: 0 10px;
   font-size: 14px;
+  margin-left: 15px;
 }
 
-.resume-button .badge {
-  background-color: white;
-  color: black;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  margin-left: 5px;
-  font-weight: bold;
-}
-
-.create-resume {
-  background-color: #2ecc71;
-  color: white;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-weight: bold;
-}
-
-.icon-button,
 .login-button {
-  font-size: 14px;
-  color: white;
-}
-
-.search {
-  display: flex;
-  align-items: center;
-}
-
-.search input {
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  margin-right: 5px;
-}
-
-.search .location {
-  color: #ccc;
-  font-size: 14px;
-  margin-left: 5px;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 5px 15px;
+  font-weight: bold;
 }
 </style>
